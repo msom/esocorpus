@@ -4,11 +4,11 @@ library(usethis)
 
 remove_gutenberg_metadata <- function(text) {
   # Returns everything between the start and end markers
-  result <- str_split_1(text, "\\*\\*\\*START OF .*\\*\\*\\*")
+  result <- str_split_1(text, "\\*\\*\\*.*\\*\\*\\*")
   if (length(result) > 1) {
     result <- result[[2]]
   }
-  result <- str_split_1(result, "\\*\\*\\*END OF .*\\*\\*\\*")[[1]]
+  result <- str_split_1(result, "\\*\\*\\*.*\\*\\*\\*")[[1]]
   result <- str_trim(result)
   return(result)
 }
