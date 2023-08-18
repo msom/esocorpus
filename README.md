@@ -21,4 +21,8 @@ data(esocorpus)
 
   - Isis Unveiled (1877)
     - Vol. 1 and 2 of 4 from the [The Theosophical Society](https://www.theosociety.org/pasadena/isis/iu-hp.htm)
+- Éliphas Lévi
+  - The History of Magic (1860) from the [Gutenberg Project](https://www.gutenberg.org/ebooks/70033)
+  - The Great Secret (1868) from the [Internet Archiv](https://archive.org/details/eliphas-levi-book-collection/Eliphas%20Levi%20-%20Elements%20Of%20The%20Qabalah/)
+
 
