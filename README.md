@@ -2,11 +2,13 @@
 
 This package contains the dataset `esocorpus` with esoteric text from the 19th century.
 
-## Installation
+## Usage
 
 ```R
 # Install the development version from GitHub
 devtools::install_github("msom/esocorpus")
+library(esocorpus)
+data(esocorpus)
 ```
 
 ## Texts
