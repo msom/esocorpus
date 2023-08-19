@@ -13,6 +13,14 @@ data(esocorpus)
 
 ## Texts
 
+- Allan Kardec
+  - The Spirits’ Book (1857) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - A What is Spiritism? (1859) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - The Mediums’ Book (1861) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - The Gospel According to Spiritism (1864) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - Heaven and Hell (1865) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - Genesis (1868) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+
 - Helena Petrovna Blavatsky
   - Isis Unveiled (1877)
     - Vol. 1 of 2 from [The Theosophicl Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_1.pdf)
