@@ -24,7 +24,7 @@ data(esocorpus)
 
 - Allan Kardec
   - The Spirits’ Book (1857) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
-  - A What is Spiritism? (1859) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+  - What is Spiritism? (1859) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
   - The Mediums’ Book (1861) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
   - The Gospel According to Spiritism (1864) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
   - Heaven and Hell (1865) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
