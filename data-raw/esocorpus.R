@@ -13,6 +13,15 @@ remove_gutenberg_metadata <- function(text) {
   return(result)
 }
 
+remove_hathitrust_metadata <- function(text) {
+  # Returns everything after the generated line
+  result <- str_split_1(text, "Generated on .+ GMT")
+  if (length(result) > 1) {
+    result <- result[[2]]
+  }
+  return(result)
+}
+
 # Read texts
 esocorpus = readtext(
   "data-raw/*.[!R]*",
@@ -23,9 +32,7 @@ esocorpus = readtext(
 
 # Cleanup
 esocorpus$text <- lapply(esocorpus$text, remove_gutenberg_metadata)
+esocorpus$text <- lapply(esocorpus$text, remove_hathitrust_metadata)
 
 # Save
 use_data(esocorpus, overwrite = TRUE)
-
-
-

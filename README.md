@@ -13,6 +13,15 @@ data(esocorpus)
 
 ## Texts
 
+- Andrew Jackson Davis
+  - The Principles of Nature (1847) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6173.0001.001&seq=1)
+
+- Louis Alphonse Cahagnet
+  - The Celestial Telegraph (1855) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6270.0001.001&seq=3)
+
+- Kerner, Justinus Andreas
+  - The seeress of Prevorst (1845) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=loc.ark%3A%2F13960%2Ft6252sp6x&seq=7)
+
 - Allan Kardec
   - The Spirits’ Book (1857) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
   - A What is Spiritism? (1859) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
@@ -23,7 +32,7 @@ data(esocorpus)
 
 - Helena Petrovna Blavatsky
   - Isis Unveiled (1877)
-    - Vol. 1 of 2 from [The Theosophicl Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_1.pdf)
+    - Vol. 1 of 2 from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_1.pdf)
     - Vol. 2 of 2 from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_2.pdf)
 
   - The Secret Doctrine (1888)
