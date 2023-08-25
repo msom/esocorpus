@@ -49,4 +49,13 @@ data(esocorpus)
   - The Great Secret (1868) from the [Internet Archiv](https://archive.org/details/eliphas-levi-book-collection/Eliphas%20Levi%20-%20Elements%20Of%20The%20Qabalah/)
   - The Key of the Mysteries (1861) from [The Masonic Trowel](http://www.themasonictrowel.com/ebooks/levi/Eliphas_Levi_-_The_Key_to_the_Mysteries.pdf)
 
+- Golden Dawn
+  - The Complete Golden Dawn System Of Magic (1984) from the [Internet Archive](https://archive.org/details/IsraelRegardie-TheCompleteGoldenDawnSystemOfMagic-1984)
+  - Astral Projection Ritual Magic and Alchemy (1987) from the [Internet Archive](https://archive.org/stream/FrancisKing-AstralProjectionRitualMagicAndAlchemyGoldenDawnMaterial/FrancisKing-AstralProjectionRitualMagicAndAlchemyGoldenDawnMaterialByS.L.MacgregorMathersAndOthers-1987_djvu.txt)
+
+- William Wynn Westcott
+  - Numbers: Their Occult Powers and Mystic Virtues (1890) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=hvd.hn66uv&seq=9)
+  - The Science of Alchymy (1893) from the [Internet Archive](https://archive.org/details/b30588029/page/n1/mode/2up)
+  - The Origin and History of Astrology (1902) from the [Internet Archive](https://archive.org/details/1902-westcott-origin-and-history-of-astrology)
+
 
