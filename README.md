@@ -19,7 +19,7 @@ data(esocorpus)
 - Louis Alphonse Cahagnet
   - The Celestial Telegraph (1855) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6270.0001.001&seq=3)
 
-- Kerner, Justinus Andreas
+- Justinus Andreas Kerner
   - The seeress of Prevorst (1845) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=loc.ark%3A%2F13960%2Ft6252sp6x&seq=7)
 
 - Allan Kardec
@@ -32,15 +32,13 @@ data(esocorpus)
 
 - Helena Petrovna Blavatsky
   - Isis Unveiled (1877) from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/iu-hp.htm)
-
   - The Secret Doctrine (1888)
     - Vol. 1 of 4 from the [Gutenberg Project](https://www.gutenberg.org/ebooks/54824)
     - Vol. 2 of 4 from the [Gutenberg Project](https://www.gutenberg.org/ebooks/54488)
     - Vol. 3 of 4 from the [Gutenberg Project](https://www.gutenberg.org/ebooks/56880)
+  - The Key to Theosophy (1889) from [The Theosophical Society](https://www.theosociety.org/pasadena/key/key-hp.htm)
+  - The Voice of the Silence (1889) from [The Theosophical Society](https://www.theosociety.org/pasadena/voice/voice.htm)
 
-  - The Key to Theosophy (1889) from [The Theosophical Society](https://www.theosociety.org/pasadena/key/key_to_theosophy.pdf)
-
-  - The Voice of the Silence (1889) from [The Theosophical Society](https://www.theosociety.org/pasadena/voice/VoiceoftheSilence_eBook.pdf)
 - Éliphas Lévi
   - Transcendental magic, its doctrine and ritual (1856) [The Library of Congress](https://www.loc.gov/item/10016966/)
   - The History of Magic (1860) from the [Gutenberg Project](https://www.gutenberg.org/ebooks/70033)
@@ -55,5 +53,3 @@ data(esocorpus)
   - Numbers: Their Occult Powers and Mystic Virtues (1890) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=hvd.hn66uv&seq=9)
   - The Science of Alchymy (1893) from the [Internet Archive](https://archive.org/details/b30588029/page/n1/mode/2up)
   - The Origin and History of Astrology (1902) from the [Internet Archive](https://archive.org/details/1902-westcott-origin-and-history-of-astrology)
-
-

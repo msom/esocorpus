@@ -41,7 +41,9 @@ remove_hathitrust_metadata <- function(text) {
 
 cleanup_isis_unveiled <- function() {
   #'
-  #' Cleanup Isis unveiled
+  #' Cleanup "Isis Unveiled"
+  #'
+  #' Removes footnote signs and fixes paragraphs spanning over pages.
   #'
   file <- "data-processed/Blavatsky_Helena Petrovna_1877_Isis Unveiled.txt"
   text <- readChar(file, file.info(file)$size) %>%
@@ -53,7 +55,10 @@ cleanup_isis_unveiled <- function() {
 
 cleanup_secret_doctrine <- function(row) {
   #'
-  #' Cleanup Secret Doctrine Vol. 1-3
+  #' Cleanup "The Secret Doctrine Vol. 1-3"
+  #'
+  #' Removes footnote signs, underlines (used as emphasis) and collapses
+  #' paragraphs to single lines.
   #'
   #' There are only a few hyphenated words, other are double-words such as
   #' "male-female". Since we cannot distinguish between, we assume/keep keep
@@ -77,26 +82,6 @@ cleanup_secret_doctrine <- function(row) {
   }
 }
 
-cleanup_key_to_theosophy <- function() {
-  #'
-  #' Cleanup Secret Doctrine Vol. 1-3
-  #'
-  #' There seems to be no hyphenated words, only double-words such as
-  #' "self-denial".
-  #'
-  #' There are some paragraphs spanning over multiple new lines, we fix only
-  #' the ones continuing with lower case letters.
-
-  file <- "data-processed/Blavatsky_Helena Petrovna_1889_The Key to Theosophy.txt"
-  text <- readChar(file, file.info(file)$size) %>%
-    str_replace_all("\\(\\d*\\)", "") %>% # footnote signs
-    str_replace_all("(.{1})‐\\n(.{1})", "\\1-\\2")  %>% # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")  %>% # collapse paragraphs
-    str_replace_all("(.{1})\\n    (.{1})", "\\1 \\2") %>% # collapse blockquotes
-    str_replace_all("([a-z][-]?)\\n\\n([a-z])", "\\1 \\2") # paragraphs spanning over pages
-
-  cat(text, file=file)
-}
 
 # ------------------------------------------------------------------------------
 # Read files and store as text files
@@ -123,7 +108,6 @@ rm(esocorpus_raw)
 # ------------------------------------------------------------------------------
 cleanup_isis_unveiled()
 cleanup_secret_doctrine()
-cleanup_key_to_theosophy()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
