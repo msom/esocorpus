@@ -31,9 +31,7 @@ data(esocorpus)
   - Genesis (1868) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
 
 - Helena Petrovna Blavatsky
-  - Isis Unveiled (1877)
-    - Vol. 1 of 2 from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_1.pdf)
-    - Vol. 2 of 2 from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/isis_unveiled_volume_2.pdf)
+  - Isis Unveiled (1877) from [The Theosophical Society](https://www.theosociety.org/pasadena/isis/iu-hp.htm)
 
   - The Secret Doctrine (1888)
     - Vol. 1 of 4 from the [Gutenberg Project](https://www.gutenberg.org/ebooks/54824)
