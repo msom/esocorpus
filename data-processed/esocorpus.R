@@ -82,9 +82,24 @@ cleanup_secret_doctrine <- function(row) {
   }
 }
 
+cleanup_numbers <- function() {
+  #'
+  #' Cleanup "Numbers, Their Occult Power and Mystic Virtues"
+  #'
+  #' Removes page numbers and fixes paragraphs spanning over pages.
+  #'
+  file <- "data-processed/Westcott_William Wynn_1890_Numbers - Their Occult Powers and Mystic Virtues.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("\\[paragraph continues\\]", "") %>%
+    str_replace_all("(.{1})\\n\\np\\. \\d{2,}\\n\\n(.{1})", "\\1 \\2") %>% # paragraphs spanning over pages
+    str_replace_all("p\\. \\d{2,}.*\\n", "") # left over page number
+
+  cat(text, file = file)
+}
+
 
 # ------------------------------------------------------------------------------
-# Read files and store as text files
+# Read raw files and store as text files
 # ------------------------------------------------------------------------------
 esocorpus_raw = readtext(
   "data-raw/*.[!R]*",
@@ -108,6 +123,7 @@ rm(esocorpus_raw)
 # ------------------------------------------------------------------------------
 cleanup_isis_unveiled()
 cleanup_secret_doctrine()
+cleanup_numbers()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
