@@ -97,6 +97,21 @@ cleanup_numbers <- function() {
   cat(text, file = file)
 }
 
+cleanup_transcendental_magic <- function() {
+  #'
+  #' Cleanup "Transcendental magic, its doctrine and ritual"
+  #'
+  #' Removes headers and collapse paragraphs.
+  #'
+  file <- "data-processed/Levi_Eliphas_1856_Transcendental magic, its doctrine and ritual.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n*\\d* [ A-Z]*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number left)
+    str_replace_all("(.{1})\\n*[ A-Z]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number right)
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  cat(text, file = file)
+}
 
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
@@ -124,6 +139,7 @@ rm(esocorpus_raw)
 cleanup_isis_unveiled()
 cleanup_secret_doctrine()
 cleanup_numbers()
+cleanup_transcendental_magic()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
