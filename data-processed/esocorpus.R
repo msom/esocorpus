@@ -102,6 +102,8 @@ cleanup_transcendental_magic <- function() {
   #' Cleanup "Transcendental magic, its doctrine and ritual"
   #'
   #' Removes headers and collapse paragraphs.
+  #' Remove everything before the introduction.
+  #' Remove the index and everything afterwards.
   #'
   file <- "data-processed/Levi_Eliphas_1856_Transcendental magic, its doctrine and ritual.txt"
   text <- readChar(file, file.info(file)$size) %>%
@@ -109,6 +111,18 @@ cleanup_transcendental_magic <- function() {
     str_replace_all("(.{1})\\n*[ A-Z]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number right)
     str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
     str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  # Remove everything before introduction
+  parts <- str_split(text, "\\nTHE DOCTEINE OF TRANSCENDENT MAGIC\\n") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove index and everything afterwards
+  parts <- str_split(text, "\\nFINIS.\\n") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
 
   cat(text, file = file)
 }
