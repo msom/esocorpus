@@ -127,6 +127,34 @@ cleanup_transcendental_magic <- function() {
   cat(text, file = file)
 }
 
+cleanup_history_of_magic <- function() {
+  #'
+  #' Cleanup "The History of Magic"
+  #'
+  #' Collapse paragraphs and removes footnotes.
+  #' Remove everything before the introduction.
+  #' Remove the index and everything afterwards.
+  #'
+  file <- "data-processed/Levi_Eliphas_1860_The History of Magic.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("\\[\\d+\\]", "")
+
+  # Remove everything before introduction
+  parts <- str_split(text, "XX. Apocalyptic Key: the Seven Seals of St. John\\s*502\\n") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove index and everything afterwards
+  parts <- str_split(text, "_September 1st, 1859._") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
 # ------------------------------------------------------------------------------
@@ -154,6 +182,7 @@ cleanup_isis_unveiled()
 cleanup_secret_doctrine()
 cleanup_numbers()
 cleanup_transcendental_magic()
+cleanup_history_of_magic()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
