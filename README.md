@@ -44,6 +44,9 @@ data(esocorpus)
   - The History of Magic (1860) from the [Gutenberg Project](https://www.gutenberg.org/ebooks/70033)
   - The Great Secret (1868) from the [Internet Archiv](https://archive.org/details/eliphas-levi-book-collection/Eliphas%20Levi%20-%20Elements%20Of%20The%20Qabalah/)
   - The Key of the Mysteries (1861) from [The Masonic Trowel](http://www.themasonictrowel.com/ebooks/levi/Eliphas_Levi_-_The_Key_to_the_Mysteries.pdf)
+- Papus
+  - The Tarot of the Bohemians (1892) from the [Internet Sacred Text Archive](https://sacred-texts.com/tarot/tob/index.htm)
+
 
 - Golden Dawn
   - The Complete Golden Dawn System Of Magic (1984) from the [Internet Archive](https://archive.org/details/IsraelRegardie-TheCompleteGoldenDawnSystemOfMagic-1984)

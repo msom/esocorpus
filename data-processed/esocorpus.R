@@ -191,7 +191,6 @@ cleanup_history_of_magic()
 # Lévi_Éliphas_1868_The Great Secret
 
 # FIXME: remove_gutenberg_metadata
-# Lévi_Éliphas_1860_The History of Magic
 # Lévi_Éliphas_1861_The Key of the Mysteries
 # Lévi_Éliphas_1868_The Great Secret
 

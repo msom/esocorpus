@@ -81,29 +81,30 @@ fetch_voice_of_silence <- function() {
   }
 }
 
-fetch_numbers <- function() {
-    #'
-    #' Gets "Numbers, Their Occult Power and Mystic Virtues".
-    #'
-    #' Does not include the prefaces.
-    #'
-    page <- read_html("https://sacred-texts.com/eso/nop/index.htm")
-    links <- page %>%
-      html_elements("a") %>%
-      html_attr("href")
-    links <- links[grepl("nop0[4-9]|nop[12]\\d", links)]
+fetch_tarot_of_bohemians <- function() {
+  #'
+  #' Gets "The Tarot of the Bohemians"
+  #'
+  #' Only includes chapters.
+  #'
+  page <- read_html("https://sacred-texts.com/tarot/tob/index.htm")
+  links <- page %>%
+    html_elements("a") %>%
+    html_attr("href")
+  links <- links[grepl("tob0[3-9]|tob[1-5]", links)]
 
-    file <- "data-raw/Westcott_William Wynn_1890_Numbers - Their Occult Powers and Mystic Virtues.txt"
-    cat("", file = file)
-    for (link in links) {
-      page <- read_html(paste0("https://sacred-texts.com/eso/nop/", link))
-      page %>%
-        html_elements('h1, h2, h3, h4, p:not([align]), div:not(.filenav)') %>%
-        html_text() %>%
-        str_squish() %>%
-        cat(file = file, sep = "\n\n", append = TRUE)
-    }
+  file <- "data-raw/Papus__1892_The Tarot of the Bohemians.txt"
+  cat("", file = file)
+  for (link in links) {
+    page <- read_html(paste0("https://sacred-texts.com/tarot/tob/", link))
+    page %>%
+      html_elements('h1, h3, p:not(.link-list-0)') %>%
+      html_text() %>%
+      str_squish() %>%
+      cat(file = file, sep = "\n\n", append = TRUE)
+  }
 }
+
 
 # ------------------------------------------------------------------------------
 # Download texts
@@ -112,3 +113,4 @@ fetch_isis_unveiled()
 fetch_key_to_theosophy()
 fetch_voice_of_silence()
 fetch_numbers()
+fetch_tarot_of_bohemians()
