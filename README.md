@@ -14,13 +14,13 @@ data(esocorpus)
 ## Texts
 
 - Andrew Jackson Davis
-  - The Principles of Nature (1847) from the [Internet Archive](https://archive.org/stream/principlesofnatu00davi/principlesofnatu00davi_djvu.txt)
+  - The Principles of Nature (1847) from the [Internet Archive](https://archive.org/details/principlesofnatu00davi)
 
 - Louis Alphonse Cahagnet
-  - The Celestial Telegraph (1855) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6270.0001.001&seq=3)
+  - The Celestial Telegraph (1855) from the [Internet Archive](https://archive.org/details/celestialtelegra00caha/page/n411/mode/2up)
 
 - Justinus Andreas Kerner
-  - The seeress of Prevorst (1845) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=loc.ark%3A%2F13960%2Ft6252sp6x&seq=7)
+  - The seeress of Prevorst (1845) from the  [Internet Archive](https://archive.org/details/seeressofprevors00kern)
 
 - Allan Kardec
   - The Spirits’ Book (1857) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)

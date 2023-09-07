@@ -192,7 +192,7 @@ cleanup_cahagnet_celestial_telegraph <- function() {
   #' Cleanup "The Celestial Telegraph"
   #'
   #' Remove headers and collaps paragraphs.
-  #' Remove everything before the introduction.
+  #' Remove everything before (including) the introduction.
   #' Remove the ads.
   #'
   file <- "data-processed/Cahagnet_Louis Alphonse_1855_The Celestial Telegraph.txt"
@@ -211,6 +211,38 @@ cleanup_cahagnet_celestial_telegraph <- function() {
 
   # Remove ads
   parts <- str_split(text, "CONTENTS Introductory Remarks") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
+cleanup_kerner_seeress <- function() {
+  #'
+  #' Cleanup "The Seeress of Prevorst.txt"
+  #'
+  #' Remove headers and collaps paragraphs.
+  #' Remove everything before (including) the introduction.
+  #' Remove the ads.
+  #'
+  file <- "data-processed/Kerner_Justinus Andreas_1845_The seeress of Prevorst.txt"
+
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n*.*THE SEERESS OF PREVORST.*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
+    str_replace_all("(.{1})\\n*[ A-Z]*\\. \\d*[\\?]*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number right)
+    str_replace_all("(.{1})-\\n*(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("(.{1})\\n{2}([a-z]{1})", "\\1 \\2") # collapse some faulty paragraphs
+
+  # Remove everything before introduction
+  parts <- str_split(text, "be treated of in this book. ") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove index
+  parts <- str_split(text, "dT .ai9J8newoJ") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[1]
@@ -250,10 +282,9 @@ cleanup_levi_transcendental_magic()
 cleanup_levi_history_of_magic()
 cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
+cleanup_kerner_seeress()
 
 # FIXME: remove_hathitrust_metadata
-# Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
-# Kerner_Justinus Andreas_1845_The seeress of Prevorst
 # Lévi_Éliphas_1868_The Great Secret
 
 # FIXME: remove_gutenberg_metadata
