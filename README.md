@@ -14,7 +14,7 @@ data(esocorpus)
 ## Texts
 
 - Andrew Jackson Davis
-  - The Principles of Nature (1847) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6173.0001.001&seq=1)
+  - The Principles of Nature (1847) from the [Internet Archive](https://archive.org/stream/principlesofnatu00davi/principlesofnatu00davi_djvu.txt)
 
 - Louis Alphonse Cahagnet
   - The Celestial Telegraph (1855) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=miun.aca6270.0001.001&seq=3)
