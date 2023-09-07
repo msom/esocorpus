@@ -157,9 +157,9 @@ cleanup_levi_history_of_magic <- function() {
 
 cleanup_davis_principles <- function() {
   #'
-  #' Cleanup "The Principles of Natur"
+  #' Cleanup "The Principles of Nature"
   #'
-  #' Collapse paragraphs and removes footnotes.
+  #' Remove headers and collaps paragraphs.
   #' Remove everything before the introduction.
   #' Remove the index and everything afterwards.
   #'
@@ -187,25 +187,58 @@ cleanup_davis_principles <- function() {
   cat(text, file = file)
 }
 
+cleanup_cahagnet_celestial_telegraph <- function() {
+  #'
+  #' Cleanup "The Celestial Telegraph"
+  #'
+  #' Remove headers and collaps paragraphs.
+  #' Remove everything before the introduction.
+  #' Remove the ads.
+  #'
+  file <- "data-processed/Cahagnet_Louis Alphonse_1855_The Celestial Telegraph.txt"
+
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n*\\d* [ A-Z\\.\\^]*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
+    str_replace_all("(.{1})\\n*[ A-Z\\.■]* \\d*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number right)
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  # Remove everything before introduction
+  parts <- str_split(text, "so sweet a hope !") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove ads
+  parts <- str_split(text, "CONTENTS Introductory Remarks") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
 # ------------------------------------------------------------------------------
-esocorpus_raw = readtext(
-  "data-raw/*.[!R]*",
-  docvarsfrom = "filenames",
-  dvsep = "_",
-  docvarnames = c("name", "first.name", "year", "title")
-)
-for(i in 1:nrow(esocorpus_raw)) {
-  cat(
-    esocorpus_raw[i, "text"],
-    file = paste0(
-      "data-processed/",
-      str_replace(esocorpus_raw[i, "doc_id"], "pdf", "txt")
-    )
+read_raw_files <- function() {
+  esocorpus_raw = readtext(
+    "data-raw/*.[!R]*",
+    docvarsfrom = "filenames",
+    dvsep = "_",
+    docvarnames = c("name", "first.name", "year", "title")
   )
+  for(i in 1:nrow(esocorpus_raw)) {
+    cat(
+      esocorpus_raw[i, "text"],
+      file = paste0(
+        "data-processed/",
+        str_replace(esocorpus_raw[i, "doc_id"], "pdf", "txt")
+      )
+    )
+  }
 }
-rm(esocorpus_raw)
+read_raw_files()
 
 # ------------------------------------------------------------------------------
 # Cleanup
@@ -216,6 +249,7 @@ cleanup_westcott_numbers()
 cleanup_levi_transcendental_magic()
 cleanup_levi_history_of_magic()
 cleanup_davis_principles()
+cleanup_cahagnet_celestial_telegraph()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
