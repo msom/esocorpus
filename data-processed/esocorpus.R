@@ -39,7 +39,7 @@ remove_hathitrust_metadata <- function(text) {
   return(result[1])
 }
 
-cleanup_isis_unveiled <- function() {
+cleanup_blavatsky_isis_unveiled <- function() {
   #'
   #' Cleanup "Isis Unveiled"
   #'
@@ -53,7 +53,7 @@ cleanup_isis_unveiled <- function() {
   cat(text, file = file)
 }
 
-cleanup_secret_doctrine <- function(row) {
+cleanup_blavatsky_secret_doctrine <- function(row) {
   #'
   #' Cleanup "The Secret Doctrine Vol. 1-3"
   #'
@@ -82,7 +82,7 @@ cleanup_secret_doctrine <- function(row) {
   }
 }
 
-cleanup_numbers <- function() {
+cleanup_westcott_numbers <- function() {
   #'
   #' Cleanup "Numbers, Their Occult Power and Mystic Virtues"
   #'
@@ -97,7 +97,7 @@ cleanup_numbers <- function() {
   cat(text, file = file)
 }
 
-cleanup_transcendental_magic <- function() {
+cleanup_levi_transcendental_magic <- function() {
   #'
   #' Cleanup "Transcendental magic, its doctrine and ritual"
   #'
@@ -127,7 +127,7 @@ cleanup_transcendental_magic <- function() {
   cat(text, file = file)
 }
 
-cleanup_history_of_magic <- function() {
+cleanup_levi_history_of_magic <- function() {
   #'
   #' Cleanup "The History of Magic"
   #'
@@ -155,6 +155,38 @@ cleanup_history_of_magic <- function() {
   cat(text, file = file)
 }
 
+cleanup_davis_principles <- function() {
+  #'
+  #' Cleanup "The Principles of Natur"
+  #'
+  #' Collapse paragraphs and removes footnotes.
+  #' Remove everything before the introduction.
+  #' Remove the index and everything afterwards.
+  #'
+  file <- "data-processed/Davis_Andrew Jackson_1847_The Principles of Nature.txt"
+
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("([^#]{1})\\n*\\n*##.*\\n\\n+.*\\n{1}(.{1})", "\\1\n\\2") %>% # remove page breaks with headers
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  # Remove everything before introduction
+  parts <- str_split(text, "BRETHREN:") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove index and everything afterwards
+  parts <- str_split(text, "T]L'E E:_ND.") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
+# kerner
+# cahagnet
+
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
 # ------------------------------------------------------------------------------
@@ -178,15 +210,15 @@ rm(esocorpus_raw)
 # ------------------------------------------------------------------------------
 # Cleanup
 # ------------------------------------------------------------------------------
-cleanup_isis_unveiled()
-cleanup_secret_doctrine()
-cleanup_numbers()
-cleanup_transcendental_magic()
-cleanup_history_of_magic()
+cleanup_blavatsky_isis_unveiled()
+cleanup_blavatsky_secret_doctrine()
+cleanup_westcott_numbers()
+cleanup_levi_transcendental_magic()
+cleanup_levi_history_of_magic()
+cleanup_davis_principles()
 
 # FIXME: remove_hathitrust_metadata
 # Cahagnet_Louis Alphonse_1855_The Celestial Telegraph
-# Davis_Andrew Jackson_1847_The Principles of Nature
 # Kerner_Justinus Andreas_1845_The seeress of Prevorst
 # Lévi_Éliphas_1868_The Great Secret
 
