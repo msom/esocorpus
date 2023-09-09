@@ -13,6 +13,9 @@ data(esocorpus)
 
 ## Texts
 
+- Jules Denis
+  - An Introduction to the Study of Animal Magnetism (1838) from the [Internet Archive](https://archive.org/details/anintroductiont01conggoog)
+
 - Andrew Jackson Davis
   - The Principles of Nature (1847) from the [Internet Archive](https://archive.org/details/principlesofnatu00davi)
 
