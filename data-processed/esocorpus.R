@@ -45,7 +45,7 @@ cleanup_blavatsky_isis_unveiled <- function() {
   #'
   #' Removes footnote signs and fixes paragraphs spanning over pages.
   #'
-  file <- "data-processed/Blavatsky_Helena Petrovna_1877_Isis Unveiled.txt"
+  file <- "data-processed/Theosophical Society_Blavatsky_Helena Petrovna_1877_Isis Unveiled.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("[\\*†‡§|¶]", "") %>%  # footnote signs
     str_replace_all("([a-z][-]?)\\n\\n([a-z])", "\\1 \\2") # paragraphs spanning over pages
@@ -65,9 +65,9 @@ cleanup_blavatsky_secret_doctrine <- function(row) {
   #' the latter.
   #'
   files <- c(
-    "data-processed/Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 1.txt",
-    "data-processed/Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 2.txt",
-    "data-processed/Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 3.txt"
+    "data-processed/Theosophical Society_Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 1.txt",
+    "data-processed/Theosophical Society_Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 2.txt",
+    "data-processed/Theosophical Society_Blavatsky_Helena Petrovna_1888_The Secret Doctrine Vol 3.txt"
   )
   for (file in files) {
     text <- readChar(file, file.info(file)$size) %>%
@@ -88,7 +88,7 @@ cleanup_westcott_numbers <- function() {
   #'
   #' Removes page numbers and fixes paragraphs spanning over pages.
   #'
-  file <- "data-processed/Westcott_William Wynn_1890_Numbers - Their Occult Powers and Mystic Virtues.txt"
+  file <- "data-processed/Golden Dawn_Westcott_William Wynn_1890_Numbers - Their Occult Powers and Mystic Virtues.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("\\[paragraph continues\\]", "") %>%
     str_replace_all("(.{1})\\n\\np\\. \\d{2,}\\n\\n(.{1})", "\\1 \\2") %>% # paragraphs spanning over pages
@@ -105,7 +105,7 @@ cleanup_levi_transcendental_magic <- function() {
   #' Remove everything before the introduction.
   #' Remove the index and everything afterwards.
   #'
-  file <- "data-processed/Levi_Eliphas_1856_Transcendental magic, its doctrine and ritual.txt"
+  file <- "data-processed/French Occultism_Levi_Eliphas_1856_Transcendental magic, its doctrine and ritual.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n*\\d* [ A-Z]*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number left)
     str_replace_all("(.{1})\\n*[ A-Z]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number right)
@@ -135,7 +135,7 @@ cleanup_levi_history_of_magic <- function() {
   #' Remove everything before the introduction.
   #' Remove the index and everything afterwards.
   #'
-  file <- "data-processed/Levi_Eliphas_1860_The History of Magic.txt"
+  file <- "data-processed/French Occultism_Levi_Eliphas_1860_The History of Magic.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
     str_replace_all("\\[\\d+\\]", "")
@@ -163,7 +163,7 @@ cleanup_davis_principles <- function() {
   #' Remove everything before the introduction.
   #' Remove the index and everything afterwards.
   #'
-  file <- "data-processed/Davis_Andrew Jackson_1847_The Principles of Nature.txt"
+  file <- "data-processed/Spiritualism_Davis_Andrew Jackson_1847_The Principles of Nature.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n*\\d* [ A-Z\\.]*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number left)
@@ -195,7 +195,7 @@ cleanup_cahagnet_celestial_telegraph <- function() {
   #' Remove everything before (including) the introduction.
   #' Remove the ads.
   #'
-  file <- "data-processed/Cahagnet_Louis Alphonse_1855_The Celestial Telegraph.txt"
+  file <- "data-processed/Spiritualism_Cahagnet_Louis Alphonse_1855_The Celestial Telegraph.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n*\\d* [ A-Z\\.\\^]*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
@@ -226,7 +226,7 @@ cleanup_kerner_seeress <- function() {
   #' Remove everything before (including) the introduction.
   #' Remove the ads.
   #'
-  file <- "data-processed/Kerner_Justinus Andreas_1845_The seeress of Prevorst.txt"
+  file <- "data-processed/Spiritualism_Kerner_Justinus Andreas_1845_The seeress of Prevorst.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n*.*THE SEERESS OF PREVORST.*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
@@ -258,7 +258,7 @@ read_raw_files <- function() {
     "data-raw/*.[!R]*",
     docvarsfrom = "filenames",
     dvsep = "_",
-    docvarnames = c("name", "first.name", "year", "title")
+    docvarnames = c("current", "name", "first.name", "year", "title")
   )
   for(i in 1:nrow(esocorpus_raw)) {
     cat(
@@ -298,6 +298,6 @@ esocorpus = readtext(
   "data-processed/*.txt",
   docvarsfrom = "filenames",
   dvsep = "_",
-  docvarnames = c("name", "first.name", "year", "title")
+  docvarnames = c("current", "name", "first.name", "year", "title")
 )
 use_data(esocorpus, overwrite = TRUE)
