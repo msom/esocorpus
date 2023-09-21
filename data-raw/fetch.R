@@ -20,7 +20,7 @@ fetch_isis_unveiled <- function() {
     html_attr("href")
   links <- links[grepl("iu[12]-\\d[^0][^b]", links)]
 
-  file <- "data-raw/Blavatsky_Helena Petrovna_1877_Isis Unveiled.txt"
+  file <- "data-raw/Blavatsky_1877.txt"
   cat("", file = file)
   for (link in links) {
     page <- read_html(paste0("https://www.theosociety.org/pasadena/isis/", link))
@@ -45,7 +45,7 @@ fetch_key_to_theosophy <- function() {
   links <- links[grepl("key-[^g]", links)]
   links <- links[!duplicated(links)]
 
-  file <- "data-raw/Blavatsky_Helena Petrovna_1889_The Key to Theosophy.txt"
+  file <- "data-raw/Blavatsky_1889_1.txt"
   cat("", file = file)
   for (link in links) {
     page <- read_html(paste0("https://www.theosociety.org/pasadena/key/", link))
@@ -69,7 +69,7 @@ fetch_voice_of_silence <- function() {
     html_attr("href")
   links <- links[grepl("voice", links)]
 
-  file <- "data-raw/Blavatsky_Helena Petrovna_1889_The Voice of the Silence.txt"
+  file <- "data-raw/Blavatsky_1889_2.txt"
   cat("", file = file)
   for (link in links) {
     page <- read_html(paste0("https://www.theosociety.org/pasadena/voice/", link))
@@ -93,7 +93,7 @@ fetch_tarot_of_bohemians <- function() {
     html_attr("href")
   links <- links[grepl("tob0[3-9]|tob[1-5]", links)]
 
-  file <- "data-raw/Papus__1892_The Tarot of the Bohemians.txt"
+  file <- "data-raw/Papus_1892.txt"
   cat("", file = file)
   for (link in links) {
     page <- read_html(paste0("https://sacred-texts.com/tarot/tob/", link))
