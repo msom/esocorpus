@@ -27,7 +27,7 @@ data(esocorpus)
 
 - Spiritism
   - Allan Kardec
-    - The Spirits’ Book (1857) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
+    - The Spirits’ Book (1857) from the [Kardecpedia](https://kardecpedia.com/en/study-guide/2/the-spirits-book/)
     - What is Spiritism? (1859) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
     - The Mediums’ Book (1861) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
     - The Gospel According to Spiritism (1864) from the [Spiritist Society of Baltimore](https://ssbaltimore.org/e-books)
