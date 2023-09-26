@@ -153,6 +153,9 @@ fetch_spirits_book <- function() {
     page %>%
       html_elements('div.texts div:not(.avancar-voltar)') %>%
       html_text2() %>%
+      paste(sep = "\n\n", collapse = "\n\n") %>%
+      str_split_1("\n\n") %>%
+      str_unique() %>%
       cat(file = file, sep = "\n\n", append = TRUE)
   }
 }
