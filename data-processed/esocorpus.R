@@ -214,7 +214,7 @@ cleanup_kerner_seeress <- function() {
   #' Remove everything before (including) the introduction.
   #' Remove the ads.
   #'
-  file <- "data-processed/Kerner_1845.txt"
+  file <- "data-processed/Kerner_1829.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n*.*THE SEERESS OF PREVORST.*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
