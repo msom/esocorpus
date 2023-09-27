@@ -3,6 +3,7 @@
 
 library(stringr)
 library(rvest)
+library(xml2)
 
 # ------------------------------------------------------------------------------
 # Helper functions
@@ -151,6 +152,10 @@ fetch_spirits_book <- function() {
   for (link in links) {
     page <- read_html(link)
     page %>%
+      as.character() %>%
+      str_replace_all("<strong>", "<p>") %>%
+      str_replace_all("</strong>", "</p>") %>%
+      read_html() %>%
       html_elements('div.texts div:not(.avancar-voltar)') %>%
       html_text2() %>%
       paste(sep = "\n\n", collapse = "\n\n") %>%
