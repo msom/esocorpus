@@ -159,30 +159,18 @@ cleanup_davis_principles <- function() {
   #'
   #' Cleanup "The Principles of Nature"
   #'
-  #' Remove headers and collaps paragraphs.
-  #' Remove everything before the introduction.
-  #' Remove the index and everything afterwards.
+  #' Duplicates newlines.
   #'
   file <- "data-processed/Davis_1847.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
-    str_replace_all("(.{1})\\n*\\d* [ A-Z\\.]*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number left)
-    str_replace_all("(.{1})\\n*[ A-Z\\.]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (number right)
-    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
-    str_replace_all(" {2,}", " ")  # replace multiple spaces with one
+    str_replace_all("\\n", "\n\n")
 
   # Remove everything before introduction
-  parts <- str_split(text, "a proper understanding of the parts.") %>%
+  parts <- str_split(text, "The NEW HEAVEN and the NEW EARTH, &C.") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
-
-  # Remove index and everything afterwards
-  parts <- str_split(text, "THE END.") %>%
-    unlist()
-  stopifnot(length(parts) == 2)
-  text <- parts[1]
 
   cat(text, file = file)
 }
