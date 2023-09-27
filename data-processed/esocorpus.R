@@ -248,7 +248,7 @@ read_raw_files <- function() {
       esocorpus_raw[i, "text"],
       file = paste0(
         "data-processed/",
-        str_replace(esocorpus_raw[i, "doc_id"], "pdf", "txt")
+        str_replace(esocorpus_raw[i, "doc_id"], "pdf|doc", "txt")
       )
     )
   }

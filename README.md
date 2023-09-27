@@ -24,6 +24,8 @@ data(esocorpus)
     - The Principles of Nature (1847) from the [Ghostcircle](http://www.ghostcircle.com/wp-content/uploads/2014/08/Andrew-Jackson-Davis-Principles-Of-Nature.doc)
   - Louis Alphonse Cahagnet
     - The Celestial Telegraph (1855) from the [Internet Archive](https://archive.org/details/celestialtelegra00caha/page/n411/mode/2up)
+  - David Dunglass Home
+    - Incidents in my Life (1863) from the [Ghostcircle](http://www.ghostcircle.com/wp-content/uploads/2014/08/Daniel-Dunglas-Home-Incidents-In-My-Life.pdf)
 
 - Spiritism
   - Allan Kardec
