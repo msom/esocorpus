@@ -18,12 +18,12 @@ data(esocorpus)
     - An Introduction to the Study of Animal Magnetism (1838) from the [Internet Archive](https://archive.org/details/anintroductiont01conggoog)
 
 - Spiritualism
+  - Justinus Andreas Kerner
+    - The seeress of Prevorst (1829) from the  [Internet Archive](https://archive.org/details/seeressofprevors00kern)
   - Andrew Jackson Davis
     - The Principles of Nature (1847) from the [Internet Archive](https://archive.org/details/principlesofnatu00davi)
   - Louis Alphonse Cahagnet
     - The Celestial Telegraph (1855) from the [Internet Archive](https://archive.org/details/celestialtelegra00caha/page/n411/mode/2up)
-  - Justinus Andreas Kerner
-    - The seeress of Prevorst (1845) from the  [Internet Archive](https://archive.org/details/seeressofprevors00kern)
 
 - Spiritism
   - Allan Kardec
