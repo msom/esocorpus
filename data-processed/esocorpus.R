@@ -170,6 +170,35 @@ cleanup_levi_key_to_the_mysteries <- function() {
   cat(text, file = file)
 }
 
+cleanup_levi_great_secret <- function() {
+  #'
+  #' Cleanup "The Great Secret"
+  #'
+  #' Collapse paragraphs
+  #' Remove everything before the first chapter
+  #' Remove the biographie
+  #'
+  file <- "data-processed/Levi_1868.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2") %>% # collapse more paragraphs
+    str_replace_all(" {2,}", " ") # remove duplicate spaces
+
+  # Remove everything before the first chapter
+  parts <- str_split(text, "‘Studies in Hermetic Tradition’ series.") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove the biographie
+  parts <- str_split(text, "Alphonse Louis Constant") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
 cleanup_davis_principles <- function() {
   #'
   #' Cleanup "The Principles of Nature"
@@ -279,6 +308,7 @@ cleanup_westcott_numbers()
 cleanup_levi_transcendental_magic()
 cleanup_levi_history_of_magic()
 cleanup_levi_key_to_the_mysteries()
+cleanup_levi_great_secret()
 cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
 cleanup_kerner_seeress()
