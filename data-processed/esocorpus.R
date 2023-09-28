@@ -26,19 +26,6 @@ remove_gutenberg_metadata <- function(text) {
   return(result[1])
 }
 
-remove_hathitrust_metadata <- function(text) {
-  #'
-  #' Returns everything after the generated line
-  #'
-  result <- str_split(text, "Generated on .+ GMT")
-  result <- unlist(result)
-  if (length(result) > 1) {
-    stopifnot(length(result) == 2)
-    return(result[2])
-  }
-  return(result[1])
-}
-
 cleanup_blavatsky_isis_unveiled <- function() {
   #'
   #' Cleanup "Isis Unveiled"
@@ -155,6 +142,34 @@ cleanup_levi_history_of_magic <- function() {
   cat(text, file = file)
 }
 
+cleanup_levi_key_to_the_mysteries <- function() {
+  #'
+  #' Cleanup "The Key to the Mysteries"
+  #'
+  #' Collapse paragraphs and removes page number
+  #' Remove everything before the the prelimiary considerations
+  #' Remove the index and everything afterwards.
+  #'
+  file <- "data-processed/Levi_1861.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("\\{\\d+\\}", "") # remove page numbers
+
+  # Remove everything before the prelimiary considerations
+  parts <- str_split(text, "miracles and prodigies.") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove everything after the epiloge
+  parts <- str_split(text, "CONTENTS") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
 cleanup_davis_principles <- function() {
   #'
   #' Cleanup "The Principles of Nature"
@@ -263,16 +278,10 @@ cleanup_blavatsky_secret_doctrine()
 cleanup_westcott_numbers()
 cleanup_levi_transcendental_magic()
 cleanup_levi_history_of_magic()
+cleanup_levi_key_to_the_mysteries()
 cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
 cleanup_kerner_seeress()
-
-# FIXME: remove_hathitrust_metadata
-# Lévi_Éliphas_1868_The Great Secret
-
-# FIXME: remove_gutenberg_metadata
-# Lévi_Éliphas_1861_The Key of the Mysteries
-# Lévi_Éliphas_1868_The Great Secret
 
 # ------------------------------------------------------------------------------
 # Export
