@@ -86,7 +86,7 @@ fetch_tarot_of_bohemians <- function() {
   #'
   #' Gets "The Tarot of the Bohemians"
   #'
-  #' Only includes chapters.
+  #' Only includes chapters, removes footnote signs and page numbers.
   #'
   page <- read_html("https://sacred-texts.com/tarot/tob/index.htm")
   links <- page %>%
@@ -99,6 +99,9 @@ fetch_tarot_of_bohemians <- function() {
   for (link in links) {
     page <- read_html(paste0("https://sacred-texts.com/tarot/tob/", link))
     page %>%
+      as.character() %>%
+      str_replace_all("<a.*</a>", "") %>%
+      read_html() %>%
       html_elements('h1, h3, p:not(.link-list-0)') %>%
       html_text() %>%
       str_squish() %>%

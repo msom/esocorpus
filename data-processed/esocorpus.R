@@ -176,7 +176,7 @@ cleanup_levi_great_secret <- function() {
   #'
   #' Collapse paragraphs
   #' Remove everything before the first chapter
-  #' Remove the biographie
+  #' Remove the biography
   #'
   file <- "data-processed/Levi_1868.txt"
   text <- readChar(file, file.info(file)$size) %>%
@@ -190,7 +190,7 @@ cleanup_levi_great_secret <- function() {
   stopifnot(length(parts) == 2)
   text <- parts[2]
 
-  # Remove the biographie
+  # Remove the biography
   parts <- str_split(text, "Alphonse Louis Constant") %>%
     unlist()
   stopifnot(length(parts) == 2)
@@ -198,6 +198,20 @@ cleanup_levi_great_secret <- function() {
 
   cat(text, file = file)
 }
+
+cleanup_papus_tarot <- function() {
+  #'
+  #' Cleanup "The Tarot of the Bohemians"
+  #'
+  #' Collapse paragraphs
+  #'
+  file <- "data-processed/Papus_1892.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2") # collapse paragraphs
+
+  cat(text, file = file)
+}
+
 
 cleanup_davis_principles <- function() {
   #'
@@ -309,6 +323,7 @@ cleanup_levi_transcendental_magic()
 cleanup_levi_history_of_magic()
 cleanup_levi_key_to_the_mysteries()
 cleanup_levi_great_secret()
+cleanup_papus_tarot()
 cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
 cleanup_kerner_seeress()
