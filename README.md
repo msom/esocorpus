@@ -15,7 +15,7 @@ data(esocorpus)
 
 - Animal Magnetism
   - Jules Denis
-    - An Introduction to the Study of Animal Magnetism (1838) from the [Internet Archive](https://archive.org/details/anintroductiont01conggoog)
+    - An Introduction to the Study of Animal Magnetism (1838) from the [Internet Archive](https://archive.org/details/b21524993)
 
 - Spiritualism
   - Justinus Andreas Kerner

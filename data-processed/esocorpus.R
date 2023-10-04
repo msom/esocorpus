@@ -296,6 +296,27 @@ cleanup_kerner_seeress <- function() {
   cat(text, file = file)
 }
 
+cleanup_denis_animal_magnetism <- function() {
+  #'
+  #' Cleanup "An Introduction to Animal Magnetism"
+  #'
+  #' Ccollapse paragraphs.
+  #' Remove everything before the preface.
+  #'
+  file <- "data-processed/Denis_1838.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  # Remove everything before introduction
+  parts <- str_split(text, "George Denton, Esq., Surgeon, Tottenham ... 387") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  cat(text, file = file)
+}
+
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
 # ------------------------------------------------------------------------------
@@ -327,6 +348,7 @@ cleanup_papus_tarot()
 cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
 cleanup_kerner_seeress()
+cleanup_denis_animal_magnetism()
 
 # ------------------------------------------------------------------------------
 # Export
