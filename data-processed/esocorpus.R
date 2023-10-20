@@ -244,8 +244,6 @@ cleanup_cahagnet_celestial_telegraph <- function() {
   file <- "data-processed/Cahagnet_1855.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
-    str_replace_all("(.{1})\\n*\\d* [ A-Z\\.\\^]*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number left)
-    str_replace_all("(.{1})\\n*[ A-Z\\.■]* \\d*\\n{2,}(.{1})", "\\1\n\\2") %>% # remove header (number right)
     str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
     str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
@@ -254,12 +252,6 @@ cleanup_cahagnet_celestial_telegraph <- function() {
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
-
-  # Remove ads
-  parts <- str_split(text, "CONTENTS Introductory Remarks") %>%
-    unlist()
-  stopifnot(length(parts) == 2)
-  text <- parts[1]
 
   cat(text, file = file)
 }
