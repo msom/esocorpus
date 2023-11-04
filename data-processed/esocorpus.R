@@ -309,6 +309,28 @@ cleanup_denis_animal_magnetism <- function() {
   cat(text, file = file)
 }
 
+cleanup_king_astral_projection <- function() {
+  #'
+  #' Cleanup "Astral Projection, Ritual Magic and Alchemy"
+  #'
+  #' Collapse paragraphs.
+  #' Remove everything before the preface.
+  #'
+  file <- "data-processed/King_1987.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>% # remove header (number left)
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+
+  # Remove everything before and including the introduction
+  parts <- str_split(text, "Some Thoughts on the Imagination  By V. H. Fra. Resurgam 1 ") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  cat(text, file = file)
+}
+
+
 # ------------------------------------------------------------------------------
 # Read raw files and store as text files
 # ------------------------------------------------------------------------------
@@ -341,6 +363,7 @@ cleanup_davis_principles()
 cleanup_cahagnet_celestial_telegraph()
 cleanup_kerner_seeress()
 cleanup_denis_animal_magnetism()
+cleanup_king_astral_projection()
 
 # ------------------------------------------------------------------------------
 # Export
