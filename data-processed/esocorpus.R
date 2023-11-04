@@ -319,10 +319,11 @@ cleanup_king_astral_projection <- function() {
   file <- "data-processed/King_1987.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>% # remove header (number left)
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
+    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before and including the introduction
-  parts <- str_split(text, "Some Thoughts on the Imagination  By V. H. Fra. Resurgam 1 ") %>%
+  parts <- str_split(text, "Some Thoughts on the Imagination By V. H. Fra. Resurgam 1") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
