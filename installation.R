@@ -1,0 +1,5 @@
+install.packages("quanteda")
+install.packages("readtext")
+install.packages("rvest")
+install.packages("stringr")
+install.packages("usethis")
