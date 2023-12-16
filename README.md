@@ -61,3 +61,8 @@ data(esocorpus)
     - Numbers: Their Occult Powers and Mystic Virtues (1890) from [HathiTrust](https://babel.hathitrust.org/cgi/pt?id=hvd.hn66uv&seq=9)
     - The Science of Alchymy (1893) from the [Internet Archive](https://archive.org/details/b30588029/page/n1/mode/2up)
     - The Origin and History of Astrology (1902) from the [Internet Archive](https://archive.org/details/1902-westcott-origin-and-history-of-astrology)
+- Other
+  - Charles Darwin
+    - On the Origin of Species By Means of Natural Selection (1859) from the [Gutenberg Project](https://www.gutenberg.org/ebooks/1228)
+  - Dion Fortune
+    - Sane Occultism (1967) from the [Internet Archive](https://archive.org/details/DionFortune/SaneOccultism/page/n1/mode/2up)

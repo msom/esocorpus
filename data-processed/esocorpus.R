@@ -364,6 +364,58 @@ cleanup_king_astral_projection <- function() {
   cat(text, file = file)
 }
 
+cleanup_darwin_species <- function() {
+  #'
+  #' Cleanup "On the Origin of Species"
+  #'
+  #' Collapse paragraphs.
+  #' Remove everything before the preface.
+  #'
+  file <- "data-processed/Darwin_1859.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    # collapse paragraphs
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2")
+
+  # Remove everything before and including the introduction
+  parts <- str_split(text, "not exclusive means of modification.") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  # Remove everything after and including the index
+  parts <- str_split(text, "INDEX.") %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[1]
+
+  cat(text, file = file)
+}
+
+cleanup_fortune_sane_occultism <- function() {
+  #'
+  #' Cleanup "Sane Occultism"
+  #'
+  #' Collapse paragraphs.
+  #' Remove everything before the preface.
+  #'
+  file <- "data-processed/Fortune_1967.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})¬\\n(.{1})", "\\1\\2")  %>%
+    # collapse paragraphs
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")
+
+  # Remove everything before and including the table of contents
+  parts <- str_split(
+    text, "XIX. The Ideals of Occultism . . . 181"
+  ) %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  cat(text, file = file)
+}
+
 # Read raw files and store as text files
 read_raw_files <- function() {
   esocorpus_raw <- readtext("data-raw/*.[!R]*")
@@ -393,6 +445,8 @@ cleanup_cahagnet_telegraph()
 cleanup_kerner_seeress()
 cleanup_denis_animal_magnetism()
 cleanup_king_astral_projection()
+cleanup_darwin_species()
+cleanup_fortune_sane_occultism()
 
 
 # Export
