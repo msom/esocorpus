@@ -364,6 +364,33 @@ cleanup_king_astral_projection <- function() {
   cat(text, file = file)
 }
 
+cleanup_regardie_golden_dawn <- function() {
+  #'
+  #' Cleanup "Complete Golden Dawn System of Magic"
+  #'
+  #' Collapse paragraphs.
+  #' Remove everything before the preface.
+  #'
+  file <- "data-processed/Regardie_1984.txt"
+  text <- readChar(file, file.info(file)$size) %>%
+    # remove header (number top)
+    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>%
+    # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>%
+    # collapse paragraphs
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2")
+
+  # Remove everything before and including the introduction
+  parts <- str_split(
+    text, "Mysteries in a highly organized and systematic manner."
+  ) %>%
+    unlist()
+  stopifnot(length(parts) == 2)
+  text <- parts[2]
+
+  cat(text, file = file)
+}
+
 cleanup_darwin_species <- function() {
   #'
   #' Cleanup "On the Origin of Species"
@@ -445,6 +472,7 @@ cleanup_cahagnet_telegraph()
 cleanup_kerner_seeress()
 cleanup_denis_animal_magnetism()
 cleanup_king_astral_projection()
+cleanup_regardie_golden_dawn()
 cleanup_darwin_species()
 cleanup_fortune_sane_occultism()
 
