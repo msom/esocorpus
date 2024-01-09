@@ -17,9 +17,7 @@ fetch_isis_unveiled <- function() {
   file <- "data-raw/Blavatsky_1877.txt"
   cat("", file = file)
   for (link in links) {
-    page <- read_html(
-      paste0("https://www.theosociety.org/pasadena/isis/", link)
-    )
+    page <- read_html(paste0("https://www.theosociety.org/pasadena/isis/", link))
     page %>%
       html_elements("h5, h3, h4, blockquote, p:not(.link-list-0)") %>%
       html_text() %>%
@@ -44,9 +42,7 @@ fetch_key_to_theosophy <- function() {
   file <- "data-raw/Blavatsky_1889_1.txt"
   cat("", file = file)
   for (link in links) {
-    page <- read_html(
-      paste0("https://www.theosociety.org/pasadena/key/", link)
-    )
+    page <- read_html(paste0("https://www.theosociety.org/pasadena/key/", link))
     page %>%
       html_elements("h5, h3, h4, blockquote, p:not(.link-list-0)") %>%
       html_text() %>%
@@ -70,9 +66,7 @@ fetch_voice_of_silence <- function() {
   file <- "data-raw/Blavatsky_1889_2.txt"
   cat("", file = file)
   for (link in links) {
-    page <- read_html(
-      paste0("https://www.theosociety.org/pasadena/voice/", link)
-    )
+    page <- read_html(paste0("https://www.theosociety.org/pasadena/voice/", link))
     page %>%
       html_elements("h5, h3, h4, blockquote, p:not(.link-list-0)") %>%
       html_text() %>%

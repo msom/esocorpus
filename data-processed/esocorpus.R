@@ -25,11 +25,8 @@ cleanup_blavatsky_isis <- function() {
   #'
   file <- "data-processed/Blavatsky_1877.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # footnote signs
-    str_replace_all("[\\*†‡§|¶]", "") %>%
-    # paragraphs spanning over pages
-    str_replace_all("([a-z][-]?)\\n\\n([a-z])", "\\1 \\2")
-
+    str_replace_all("[\\*†‡§|¶]", "") %>% # footnote signs
+    str_replace_all("([a-z][-]?)\\n\\n([a-z])", "\\1 \\2") # paragraphs spanning over pages
   cat(text, file = file)
 }
 
@@ -37,12 +34,10 @@ cleanup_blavatsky_secret <- function(row) {
   #'
   #' Cleanup "The Secret Doctrine Vol. 1-3"
   #'
-  #' Removes footnote signs, underlines (used as emphasis) and collapses
-  #' paragraphs to single lines.
+  #' Removes footnote signs, underlines (used as emphasis) and collapses paragraphs.
   #'
-  #' There are only a few hyphenated words, other are double-words such as
-  #' "male-female". Since we cannot distinguish between, we assume/keep keep
-  #' the latter.
+  #' There are only a few hyphenated words, other are double-words such as "male-female". Since we
+  #' cannot distinguish between, we assume/keep keep the latter.
   #'
   files <- c(
     "data-processed/Blavatsky_1888_1.txt",
@@ -52,17 +47,11 @@ cleanup_blavatsky_secret <- function(row) {
   for (file in files) {
     text <- readChar(file, file.info(file)$size) %>%
       remove_gutenberg_metadata() %>%
-      # footnote signs
-      str_replace_all("\\(\\d*\\)", "") %>%
-      # remove underlines for emphasis
-      str_replace_all("_", "") %>%
-      # collapse paragraphs with hyphenation
-      str_replace_all("(.{1})‐\\n(.{1})", "\\1-\\2")  %>%
-      # collapse paragraphs
-      str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")  %>%
-      # collapse blockquotes
-      str_replace_all("(.{1})\\n    (.{1})", "\\1 \\2")
-
+      str_replace_all("\\(\\d*\\)", "") %>% # footnote signs
+      str_replace_all("_", "") %>% # remove underlines for emphasis
+      str_replace_all("(.{1})‐\\n(.{1})", "\\1-\\2")  %>% # collapse paragraphs with hyphenation
+      str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")  %>% # collapse paragraphs
+      str_replace_all("(.{1})\\n    (.{1})", "\\1 \\2") # collapse blockquotes
     cat(text, file = file)
   }
 }
@@ -76,11 +65,8 @@ cleanup_westcott_numbers <- function() {
   file <- "data-processed/Westcott_1890.txt"
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("\\[paragraph continues\\]", "") %>%
-    # paragraphs spanning over pages
-    str_replace_all("(.{1})\\n\\np\\. \\d{2,}\\n\\n(.{1})", "\\1 \\2") %>%
-    # left over page number
-    str_replace_all("p\\. \\d{2,}.*\\n", "")
-
+    str_replace_all("(.{1})\\n\\np\\. \\d{2,}\\n\\n(.{1})", "\\1 \\2") %>% # paragraphs
+    str_replace_all("p\\. \\d{2,}.*\\n", "") # left over page number
   cat(text, file = file)
 }
 
@@ -88,20 +74,15 @@ cleanup_levi_magic <- function() {
   #'
   #' Cleanup "Transcendental magic, its doctrine and ritual"
   #'
-  #' Removes headers and collapse paragraphs.
-  #' Remove everything before the introduction.
-  #' Remove the index and everything afterwards.
+  #' Removes headers and collapse paragraphs, remove everything before the introduction, remove
+  #' the index and everything afterwards.
   #'
   file <- "data-processed/Levi_1856.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # remove header (number left)
-    str_replace_all("(.{1})\\n*\\d* [ A-Z]*\\n{2}(.{1})", "\\1\n\\2") %>%
-    # remove header (number right)
-    str_replace_all("(.{1})\\n*[ A-Z]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})\\n*\\d* [ A-Z]*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (left)
+    str_replace_all("(.{1})\\n*[ A-Z]* \\d*\\n{2}(.{1})", "\\1\n\\2") %>% # remove header (right)
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before introduction
   parts <- str_split(text, "\\nTHE DOCTEINE OF TRANSCENDENT MAGIC\\n") %>%
@@ -122,20 +103,16 @@ cleanup_levi_history_of_magic <- function() {
   #'
   #' Cleanup "The History of Magic"
   #'
-  #' Collapse paragraphs and removes footnotes.
-  #' Remove everything before the introduction.
-  #' Remove the index and everything afterwards.
+  #' Collapse paragraphs and removes footnotes, remove everything before the introduction, remove
+  #' the index and everything afterwards.
   #'
   file <- "data-processed/Levi_1860.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>%
-    str_replace_all("\\[\\d+\\]", "")
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("\\[\\d+\\]", "") # remove footnotes
 
   # Remove everything before introduction
-  parts <- str_split(
-    text, "XX. Apocalyptic Key: the Seven Seals of St. John\\s*502\\n"
-  ) %>%
+  parts <- str_split(text, "XX. Apocalyptic Key: the Seven Seals of St. John\\s*502\\n") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
@@ -153,16 +130,13 @@ cleanup_levi_key <- function() {
   #'
   #' Cleanup "The Key to the Mysteries"
   #'
-  #' Collapse paragraphs and removes page number
-  #' Remove everything before the the prelimiary considerations
-  #' Remove the index and everything afterwards.
+  #' Collapse paragraphs and removes page number, remove everything before the the prelimiary
+  #' considerations, remove the index and everything afterwards.
   #'
   file <- "data-processed/Levi_1861.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>%
-    # remove page numbers
-    str_replace_all("\\{\\d+\\}", "")
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("\\{\\d+\\}", "") # remove page numbers
 
   # Remove everything before the prelimiary considerations
   parts <- str_split(text, "miracles and prodigies.") %>%
@@ -183,18 +157,13 @@ cleanup_levi_great_secret <- function() {
   #'
   #' Cleanup "The Great Secret"
   #'
-  #' Collapse paragraphs
-  #' Remove everything before the first chapter
-  #' Remove the biography
+  #' Collapse paragraphs, remove everything before the first chapter, remove the biography.
   #'
   file <- "data-processed/Levi_1868.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>%
-    # collapse more paragraphs
-    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2") %>%
-    # remove duplicate spaces
-    str_replace_all(" {2,}", " ")
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2") %>% # collapse more paragraphs
+    str_replace_all(" {2,}", " ") # remove duplicate spaces
 
   # Remove everything before the first chapter
   parts <- str_split(text, "‘Studies in Hermetic Tradition’ series.") %>%
@@ -215,13 +184,11 @@ cleanup_papus_tarot <- function() {
   #'
   #' Cleanup "The Tarot of the Bohemians"
   #'
-  #' Collapse paragraphs
+  #' Collapse paragraphs.
   #'
   file <- "data-processed/Papus_1892.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs
-    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2")
-
+    str_replace_all("([a-z ]{1})\\n+([a-z]{1})", "\\1 \\2") # collapse paragraphs
   cat(text, file = file)
 }
 
@@ -233,7 +200,6 @@ cleanup_davis_principles <- function() {
   #' Duplicates newlines.
   #'
   file <- "data-processed/Davis_1847.txt"
-
   text <- readChar(file, file.info(file)$size) %>%
     str_replace_all("\\n", "\n\n")
 
@@ -250,17 +216,14 @@ cleanup_cahagnet_telegraph <- function() {
   #'
   #' Cleanup "The Celestial Telegraph"
   #'
-  #' Remove headers and collaps paragraphs.
-  #' Remove everything before (including) the introduction.
-  #' Remove the ads.
+  #' Remove headers and collaps paragraphs, remove everything before (including) the introduction,
+  #' remove the ads.
   #'
   file <- "data-processed/Cahagnet_1855.txt"
 
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before introduction
   parts <- str_split(text, "so sweet a hope !") %>%
@@ -275,27 +238,17 @@ cleanup_kerner_seeress <- function() {
   #'
   #' Cleanup "The Seeress of Prevorst.txt"
   #'
-  #' Remove headers and collaps paragraphs.
-  #' Remove everything before (including) the introduction.
-  #' Remove the ads.
+  #' Remove headers and collaps paragraphs, remove everything before (including) the introduction,
+  #' remove the ads.
   #'
   file <- "data-processed/Kerner_1829.txt"
-
   text <- readChar(file, file.info(file)$size) %>%
-    # remove header (number left)
-    str_replace_all(
-      "(.{1})\\n*.*THE SEERESS OF PREVORST.*\\n{2,}(.{1})", "\\1\n\\2"
-    ) %>%
-    # remove header (number right)
-    str_replace_all(
-      "(.{1})\\n*[ A-Z]*\\. \\d*[\\?]*\\n{2,}(.{1})", "\\1\n\\2"
-    ) %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-\\n*(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>%
-    # collapse some faulty paragraphs
-    str_replace_all("(.{1})\\n{2}([a-z]{1})", "\\1 \\2")
+    # remove header
+    str_replace_all("(.{1})\\n*.*THE SEERESS OF PREVORST.*\\n{2,}(.{1})", "\\1\n\\2") %>%
+    str_replace_all("(.{1})\\n*[ A-Z]*\\. \\d*[\\?]*\\n{2,}(.{1})", "\\1\n\\2") %>%
+    str_replace_all("(.{1})-\\n*(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") %>% # collapse paragraphs
+    str_replace_all("(.{1})\\n{2}([a-z]{1})", "\\1 \\2") # collapse some faulty paragraphs
 
   # Remove everything before introduction
   parts <- str_split(text, "be treated of in this book. ") %>%
@@ -316,20 +269,15 @@ cleanup_denis_animal_magnetism <- function() {
   #'
   #' Cleanup "An Introduction to Animal Magnetism"
   #'
-  #' Ccollapse paragraphs.
-  #' Remove everything before the preface.
+  #' Collapse paragraphs, remove everything before the preface.
   #'
   file <- "data-processed/Denis_1838.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})-\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before introduction
-  parts <- str_split(
-    text, "George Denton, Esq., Surgeon, Tottenham ... 387"
-  ) %>%
+  parts <- str_split(text, "George Denton, Esq., Surgeon, Tottenham ... 387") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
@@ -341,22 +289,16 @@ cleanup_king_astral_projection <- function() {
   #'
   #' Cleanup "Astral Projection, Ritual Magic and Alchemy"
   #'
-  #' Collapse paragraphs.
-  #' Remove everything before the preface.
+  #' Collapse paragraphs, remove everything before the preface.
   #'
   file <- "data-processed/King_1987.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # remove header (number left)
-    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>% # remove header
+    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before and including the introduction
-  parts <- str_split(
-    text, "Some Thoughts on the Imagination By V. H. Fra. Resurgam 1"
-  ) %>%
+  parts <- str_split(text, "Some Thoughts on the Imagination By V. H. Fra. Resurgam 1") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
@@ -368,22 +310,16 @@ cleanup_regardie_golden_dawn <- function() {
   #'
   #' Cleanup "Complete Golden Dawn System of Magic"
   #'
-  #' Collapse paragraphs.
-  #' Remove everything before the preface.
+  #' Collapse paragraphs, remove everything before the preface.
   #'
   file <- "data-processed/Regardie_1984.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # remove header (number top)
-    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})\\n+[ 0-9]+\\n+[ A-Z]*\\n+(.{1})", "\\1\n\\2") %>% # remove header
+    str_replace_all("(.{1})-[ ]*\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before and including the introduction
-  parts <- str_split(
-    text, "Mysteries in a highly organized and systematic manner."
-  ) %>%
+  parts <- str_split(text, "Mysteries in a highly organized and systematic manner.") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
@@ -395,13 +331,11 @@ cleanup_darwin_species <- function() {
   #'
   #' Cleanup "On the Origin of Species"
   #'
-  #' Collapse paragraphs.
-  #' Remove everything before the preface.
+  #' Collapse paragraphs, remove everything before the preface.
   #'
   file <- "data-processed/Darwin_1859.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})[ ]*\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before and including the introduction
   parts <- str_split(text, "not exclusive means of modification.") %>%
@@ -422,20 +356,15 @@ cleanup_fortune_sane_occultism <- function() {
   #'
   #' Cleanup "Sane Occultism"
   #'
-  #' Collapse paragraphs.
-  #' Remove everything before the preface.
+  #' Collapse paragraphs, remove everything before the preface.
   #'
   file <- "data-processed/Fortune_1967.txt"
   text <- readChar(file, file.info(file)$size) %>%
-    # collapse paragraphs with hyphenation
-    str_replace_all("(.{1})¬\\n(.{1})", "\\1\\2")  %>%
-    # collapse paragraphs
-    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2")
+    str_replace_all("(.{1})¬\\n(.{1})", "\\1\\2")  %>% # collapse paragraphs with hyphenation
+    str_replace_all("(.{1})\\n(.{1})", "\\1 \\2") # collapse paragraphs
 
   # Remove everything before and including the table of contents
-  parts <- str_split(
-    text, "XIX. The Ideals of Occultism . . . 181"
-  ) %>%
+  parts <- str_split(text, "XIX. The Ideals of Occultism . . . 181") %>%
     unlist()
   stopifnot(length(parts) == 2)
   text <- parts[2]
@@ -449,10 +378,7 @@ read_raw_files <- function() {
   for (i in 1:nrow(esocorpus_raw)) {
     cat(
       esocorpus_raw[i, "text"],
-      file = paste0(
-        "data-processed/",
-        str_replace(esocorpus_raw[i, "doc_id"], "pdf|doc", "txt")
-      )
+      file = paste0("data-processed/", str_replace(esocorpus_raw[i, "doc_id"], "pdf|doc", "txt"))
     )
   }
 }
@@ -476,7 +402,6 @@ cleanup_regardie_golden_dawn()
 cleanup_darwin_species()
 cleanup_fortune_sane_occultism()
 
-
 # Export
 esocorpus <- corpus(readtext("data-processed/*.txt"))
 metadata <- read.csv("data-processed/metadata.csv")
@@ -485,11 +410,7 @@ for (index in 1:length(esocorpus)) {
   stopifnot(
     startsWith(
       as.character(docid(esocorpus[index, ])),
-      paste(
-        docvars(esocorpus[index, ])$name,
-        docvars(esocorpus[index, ])$year,
-        sep = "_"
-      )
+      paste(docvars(esocorpus[index, ])$name, docvars(esocorpus[index, ])$year, sep = "_")
     )
   )
 }
